@@ -1,13 +1,54 @@
 package com.cjchika.jobapp.company.impl;
 
 import com.cjchika.jobapp.company.Company;
+import com.cjchika.jobapp.company.CompanyRepository;
 import com.cjchika.jobapp.company.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class CompanyServiceImpl implements CompanyService {
+
+    @Autowired
+    private CompanyRepository companyRepo;
+
     @Override
     public List<Company> getAllCompanies() {
-        return List.of();
+        return companyRepo.findAll();
+    }
+
+    @Override
+    public boolean updateCompany(Long id, Company company) {
+
+        Optional<Company> companyOptional = companyRepo.findById(id);
+
+        if(companyOptional.isPresent()){
+            companyRepo.save(company);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void createCompany(Company company) {
+        companyRepo.save(company);
+    }
+
+    @Override
+    public Company getCompanyById(Long id) {
+        return companyRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean deleteCompanyById(Long id) {
+        try {
+            companyRepo.deleteById(id);
+            return  true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
