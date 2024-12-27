@@ -1,6 +1,5 @@
 package com.cjchika.jobapp.job.impl;
 
-import com.cjchika.jobapp.company.Company;
 import com.cjchika.jobapp.job.Job;
 import com.cjchika.jobapp.job.JobRepository;
 import com.cjchika.jobapp.job.JobService;
