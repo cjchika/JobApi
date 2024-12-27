@@ -1,6 +1,7 @@
 package com.cjchika.jobapp.company;
 
 import com.cjchika.jobapp.job.Job;
+import com.cjchika.jobapp.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -19,14 +20,18 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
+
     public Company() {
     }
 
-    public Company(Long id, String name, String description, List<Job> jobs) {
+    public Company(Long id, String name, String description, List<Job> jobs, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.jobs = jobs;
+        this.reviews = reviews;
     }
 
     public Long getId() {
@@ -59,5 +64,13 @@ public class Company {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
