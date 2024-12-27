@@ -52,7 +52,7 @@ public class JobController {
 
         if(updated)
             return new ResponseEntity<>("Job updated successfully!", HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>("Job not found!",HttpStatus.NOT_FOUND);
     }
 }

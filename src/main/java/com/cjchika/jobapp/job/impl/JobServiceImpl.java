@@ -33,12 +33,14 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean deleteJobById(Long id) {
-         try {
-             jobRepo.deleteById(id);
-             return  true;
-         } catch (Exception e){
-             return false;
-         }
+        Optional<Job> jobOptional = jobRepo.findById(id);
+
+        if (jobOptional.isPresent()) {
+            jobRepo.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class JobServiceImpl implements JobService {
             existingJob.setLocation(job.getLocation());
             existingJob.setMaxSalary(job.getMaxSalary());
             existingJob.setMinSalary(job.getMinSalary());
+            existingJob.setCompany(job.getCompany());
 
             jobRepo.save(existingJob);
             return true;

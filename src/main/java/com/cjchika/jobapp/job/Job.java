@@ -1,5 +1,6 @@
 package com.cjchika.jobapp.job;
 
+import com.cjchika.jobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,10 +16,13 @@ public class Job {
     private String maxSalary;
     private String location;
 
+    @ManyToOne
+    private Company company;
+
     public Job() {
     }
 
-    public Job(Long id, String description, String title, String minSalary, String maxSalary, String location) {
+    public Job(Long id, String description, String title, String minSalary, String maxSalary, String location, Company company) {
 
         this.id = id;
         this.description = description;
@@ -26,6 +30,7 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+        this.company = company;
     }
 
     public Long getId() {
@@ -74,5 +79,13 @@ public class Job {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

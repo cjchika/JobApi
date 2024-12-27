@@ -22,13 +22,13 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<Company> createJob(@RequestBody Company company){
+    public ResponseEntity<Company> createCompany(@RequestBody Company company){
         companyService.createCompany(company);
         return new ResponseEntity<>(company, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> createJob(@PathVariable Long id){
+    public ResponseEntity<Company> getCompany(@PathVariable Long id){
         Company com = companyService.getCompanyById(id);
 
         if(com != null)
@@ -38,7 +38,7 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Company com){
+    public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company com){
         boolean updated = companyService.updateCompany(id, com);
 
         if(updated)
@@ -48,13 +48,14 @@ public class CompanyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteJob(@PathVariable Long id){
+    public ResponseEntity<String> deleteCompany(@PathVariable Long id){
         boolean isDeleted = companyService.deleteCompanyById(id);
 
-        if(isDeleted)
+        if(isDeleted){
             return new ResponseEntity<>("Company deleted successfully!", HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else{
+            return new ResponseEntity<>("Company not found!",HttpStatus.NOT_FOUND);
+        }
     }
 
 }
