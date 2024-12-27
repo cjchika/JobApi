@@ -30,6 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
             existingCompany.setName(company.getName());
             existingCompany.setDescription(company.getDescription());
             existingCompany.setJobs(company.getJobs());
+            existingCompany.setReviews(company.getReviews());
 
             companyRepo.save(existingCompany);
             return true;
