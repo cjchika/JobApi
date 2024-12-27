@@ -22,11 +22,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean updateCompany(Long id, Company company) {
-
         Optional<Company> companyOptional = companyRepo.findById(id);
 
-        if(companyOptional.isPresent()){
-            companyRepo.save(company);
+        if(companyOptional.isPresent()) {
+            Company existingCompany = companyOptional.get();
+
+            existingCompany.setName(company.getName());
+            existingCompany.setDescription(company.getDescription());
+            existingCompany.setJobs(company.getJobs());
+
+            companyRepo.save(existingCompany);
             return true;
         }
         return false;

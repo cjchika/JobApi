@@ -1,5 +1,6 @@
 package com.cjchika.jobapp.job.impl;
 
+import com.cjchika.jobapp.company.Company;
 import com.cjchika.jobapp.job.Job;
 import com.cjchika.jobapp.job.JobRepository;
 import com.cjchika.jobapp.job.JobService;
@@ -41,11 +42,19 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean updateJob(Long id, Job updatedJob) {
+    public boolean updateJob(Long id, Job job) {
         Optional<Job> jobOptional = jobRepo.findById(id);
 
         if(jobOptional.isPresent()){
-            jobRepo.save(updatedJob);
+            Job existingJob = jobOptional.get();
+
+            existingJob.setTitle(job.getTitle());
+            existingJob.setDescription(job.getDescription());
+            existingJob.setLocation(job.getLocation());
+            existingJob.setMaxSalary(job.getMaxSalary());
+            existingJob.setMinSalary(job.getMinSalary());
+
+            jobRepo.save(existingJob);
             return true;
         }
         return false;
