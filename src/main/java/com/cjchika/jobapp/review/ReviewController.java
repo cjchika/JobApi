@@ -30,4 +30,10 @@ public class ReviewController {
            return new ResponseEntity<>("Review not saved!", HttpStatus.BAD_REQUEST);
        }
     }
+
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<Review> getReview(@PathVariable Long companyId, @PathVariable Long reviewId){
+        Review review = reviewService.getReview(companyId, reviewId);
+        return new ResponseEntity<>(review, HttpStatus.OK);
+    }
 }
