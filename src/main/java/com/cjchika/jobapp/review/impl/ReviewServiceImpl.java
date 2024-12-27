@@ -1,5 +1,7 @@
 package com.cjchika.jobapp.review.impl;
 
+import com.cjchika.jobapp.company.Company;
+import com.cjchika.jobapp.company.CompanyService;
 import com.cjchika.jobapp.review.Review;
 import com.cjchika.jobapp.review.ReviewRepository;
 import com.cjchika.jobapp.review.ReviewService;
@@ -14,8 +16,24 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ReviewRepository reviewRepo;
 
+    @Autowired
+    private CompanyService companyService;
+
     @Override
     public List<Review> getAllReviews(Long companyId) {
         return reviewRepo.findByCompanyId(companyId);
+    }
+
+    @Override
+    public boolean addReview(Long companyId, Review review) {
+        Company company = companyService.getCompanyById(companyId);
+
+        if(company != null){
+            review.setCompany(company);
+            reviewRepo.save(review);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
