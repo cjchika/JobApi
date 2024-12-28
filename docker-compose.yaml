@@ -1,11 +1,10 @@
-
 services:
   postgres:
     image: postgres:latest
     container_name: postgresdb
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0000000
+      POSTGRES_PASSWORD: 000x0x0x0
       PGDATA: /data/postgres
     volumes:
       - postgres_data:/data/postgres
